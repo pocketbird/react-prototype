@@ -1,0 +1,46 @@
+// Colors
+$black: #232A31;
+$blue: #337ab7;
+$dark-blue: #09387f;
+$dark-gray: #555;
+$light-gray: #a9a9a9;
+$lighter-gray: #e5e5e5;
+$green: #00b200;
+$orange: #FFA500;
+$pink: #da2575;
+$red: #ff0000;
+$steam: #f5f7f9;
+$white: #fff;
+
+$color__background: $steam;
+$color__primary: $blue;
+$color__accent: $green;
+
+// Fonts
+$font__family--base: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+$font__family--alt: serif;
+
+$font__color--base: $black;
+
+$font__size--base: 16px;
+$font__size--small: $font__size--base * .9;
+$font__size--large: $font__size--base * 1.5;
+$font__size--extra-large: $font__size--base * 2.5;
+
+$font__weight--light: 100;
+$font__weight--normal: 400;
+$font__weight--bold: 900;
+$font__weight--base: $font__weight--normal;
+
+// Spacing, Breakpoints, etc.
+$border-radius: 5px;
+
+$spacing: 15px;
+
+$max-width: 1200px;
+
+$breakpoint__sm-min: 480px;
+$breakpoint__md-min: 768px;
+$breakpoint__lg-min: 1100px;
+
+$transition: all .3s ease-in-out;

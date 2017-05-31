@@ -1,0 +1,13 @@
+@mixin button($background-color, $background-color--hover, $text-color, $text-color--hover: $text-color, $border-color: $background-color, $border-color--hover: $background-color--hover) {
+  background-color: $background-color;
+  border-color: $border-color;
+  color: $text-color;
+  padding-left: $spacing * 2;
+  padding-right: $spacing * 2;
+
+  &:hover {
+    background-color: $background-color--hover;
+    border-color: $border-color--hover;
+    color: $text-color--hover;
+  }
+}

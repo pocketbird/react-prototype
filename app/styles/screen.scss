@@ -1,0 +1,423 @@
+@import "base/variables";
+@import "mixins/button";
+@import "base/reset";
+
+$hca-gray-lighter: #e1e4e6;
+$hca-gray-lightest: #f5f7f9;
+$hca-border-radius: 5px;
+
+.hidden {
+  display: none;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: $max-width;
+  padding: $spacing;
+}
+
+.message-threads {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.thread {
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 3px -1px rgba(0,0,0,0.2);
+  opacity: .9;
+  transition: $transition;
+
+  &:not(:last-child) {
+    margin-bottom: $spacing / 2;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 20px -6px rgba(0,0,0,0.2);
+    opacity: 1;
+  }
+}
+
+.thread-header {
+  cursor: pointer;
+  display: flex;
+  padding: $spacing;
+  position: relative;
+  z-index: 1;
+
+  @media (min-width: $breakpoint__sm-min) {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__meta {
+    @media (min-width: $breakpoint__md-min) {
+      display: flex;
+      flex-grow: 1;
+    }
+  }
+
+  &__status {
+    display: none;
+
+    @media (min-width: $breakpoint__sm-min) {
+      border-radius: 50%;
+      display: block;
+      height: 10px;
+      margin-right: $spacing;
+      width: 10px;
+    }
+  }
+
+  &__avatar {
+    border-radius: 50%;
+    display: none;
+    height: 40px;
+    margin-right: $spacing;
+    width: 40px;
+
+    @media (min-width: $breakpoint__sm-min) {
+      display: inline-block;
+      margin-right: $spacing * 2;
+    }
+  }
+
+  &__sender {
+    display: block;
+    font-weight: $font__weight--bold;
+    margin-right: $spacing * 2;
+
+    @media(min-width: $breakpoint__sm-min) {
+      font-weight: $font__weight--normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // width: 125px;
+    }
+
+    @media (min-width: $breakpoint__md-min) {
+      width: 200px;
+    }
+  }
+
+  &__subject {
+    display: inline-block;
+    font-size: 1em;
+
+    @media (min-width: $breakpoint__sm-min) and (max-width: $breakpoint__md-min) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__timestamp,
+  &__close-button {
+    display: inline-block;
+    // color: $light-gray;
+    font-style: italic;
+    margin-left: auto;
+    padding: 0 0 0 .5em;
+  }
+
+  &__timestamp {
+    font-size: $font__size--base * .75;
+    position: relative;
+    top: 3px;
+
+    @media (min-width: $breakpoint__sm-min) {
+      font-size: $font__size--base;
+      top: 0;
+    }
+  }
+}
+
+.status-unread {
+  background-color: $blue;
+}
+
+.status-starred {
+  background-color: $orange;
+}
+
+.message {
+  border-top: 1px dashed $light-gray;
+  padding: $spacing;
+  transition: $transition;
+
+  @media (min-width: $breakpoint__md-min) {
+    @for $i from 2 through 10 {
+      &:nth-child(#{$i}) {
+        padding-left: 30px * $i;
+      }
+    }
+  }
+}
+
+.specialties-container {
+  border-top: 1px solid #f5f7f9;
+  padding: $spacing;
+}
+
+.specialties-list {
+  li {
+    list-style-type: none;
+  }
+}
+
+.details-actions {
+  // display: flex;
+  // align-items: flex-end;
+  // width: 100%;
+  // button {
+    text-align: right;
+    // float: right;
+  // }
+
+  &__button {
+    background-color: #1e71cd;
+    border-color: #1e71cd;
+    color: #fff;
+
+    &:hover {
+      background-color: #063d7a;
+      border-color: #063d7a;
+      color: #f5f7f9;
+    }
+  }
+}
+
+.message-header {
+  display: flex;
+  font-size: .8em;
+  position: relative;
+
+  &__avatar {
+    border-radius: 50%;
+    display: none;
+    height: 3em;
+    margin-right: $spacing;
+    width: 3em;
+
+    @media (min-width: $breakpoint__sm-min) {
+      display: inline-block;
+    }
+  }
+
+  &__sender {
+    // font-size: .8em;
+  }
+
+  &__subject {
+    // font-size: 1em;
+  }
+
+  &__timestamp {
+    color: $light-gray;
+    font-size: .9em;
+    font-style: italic;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.sender-unread {
+  color: $blue;
+  font-weight: $font__weight--bold;
+}
+
+.subject-unread,
+.timestamp-unread {
+  color: $black;
+  font-weight: $font__weight--bold;
+}
+
+// .thread-header__actions {
+//   font-size: 20px;
+//   margin: $spacing;
+//   position: relative;
+//   top: 3px;
+//   z-index: 9;
+
+//   button {
+//     padding: 0 0 0 .5em;
+//   }
+// }
+
+.message-actions {
+  font-size: 20px;
+  margin: $spacing;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  button {
+    padding: 0 0 0 .5em;
+  }
+}
+
+.default-button {
+  @include button(transparent, transparent, $dark-gray, $black, $dark-gray, $black)
+}
+
+.text-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: $light-gray;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.text-button--red:hover,
+.text-button--red.selected {
+  color: $red;
+  opacity: 1;
+}
+
+.text-button--blue:hover,
+.text-button--blue.selected {
+  color: $blue;
+  opacity: 1;
+}
+
+.text-button--green:hover,
+.text-button--green.selected {
+  color: $green;
+  opacity: 1;
+}
+
+.text-button--orange:hover,
+.text-button--orange.selected {
+  color: $orange;
+  opacity: 1;
+}
+
+.text-button--pink:hover,
+.text-button--pink.selected {
+  color: $pink;
+  opacity: 1;
+}
+
+.filters {
+  font-size: 14px;
+  margin-bottom: $spacing;
+
+  // @media (min-width: $breakpoint__sm-min) {
+    // align-items: center;
+    // display: flex;
+  // }
+}
+
+.search-bar {
+  padding: $spacing 0;
+
+  input {
+    border: 1px solid $light-gray;
+    border-radius: $border-radius;
+    font-size: 1em;
+    padding: $spacing / 2;
+    width: 100%;
+  }
+}
+
+.checkbox {
+  display: inline-block;
+  margin-right: $spacing;
+
+  @media (min-width: $breakpoint__sm-min) {
+    margin-left: $spacing;
+    margin-right: 0;
+  }
+}
+
+.compose-button {
+  @include button($dark-blue, darken($dark-blue, 7), $white);
+  margin-left: auto;
+
+  .icon {
+    margin-right: $spacing / 2;
+  }
+}
+
+// star
+.custom-checkbox--star {
+  display: inline-block;
+
+  input[type=checkbox] {
+    display:none;
+  }
+
+  input[type=checkbox] + label:before {
+    color: $light-gray;
+    content: "\7e";
+    display: inline-block;
+    font-family: "unity-icons";
+    letter-spacing: 10px;
+  }
+
+  input[type=checkbox] + label:hover {
+    color: $orange;
+    cursor: pointer;
+  }
+
+  input[type=checkbox]:checked + label:before {
+    color: $orange;
+  }
+}
+
+// read
+.custom-checkbox--read {
+  display: inline-block;
+
+  input[type=checkbox] {
+    display:none;
+  }
+
+  input[type=checkbox] + label:before {
+    color: $light-gray;
+    content: "\7d";
+    display: inline-block;
+    font-family: "unity-icons";
+    letter-spacing: 10px;
+  }
+
+  input[type=checkbox] + label:hover {
+    color: $green;
+    cursor: pointer;
+  }
+
+  input[type=checkbox]:checked + label:before {
+    color: $green;
+  }
+}
+
+// delete
+.custom-checkbox--delete {
+  display: inline-block;
+
+  input[type=checkbox] {
+    display:none;
+  }
+
+  input[type=checkbox] + label:before {
+    color: $light-gray;
+    content: "\e000";
+    display: inline-block;
+    font-family: "unity-icons";
+    letter-spacing: 10px;
+  }
+
+  input[type=checkbox] + label:hover {
+    color: $red;
+    cursor: pointer;
+  }
+
+  input[type=checkbox]:checked + label:before {
+    color: $red;
+  }
+}

@@ -1,0 +1,111 @@
+// BASE / TYPOGRAPHY
+html {
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: $color__background;
+  color: $font__color--base;
+  font-family: $font__family--base;
+  font-size: $font__size--base;
+  font-weight: $font__weight--base;
+  margin: 0;
+}
+
+strong { font-weight: $font__weight--bold }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font__weight--base;
+  margin: 0;
+}
+
+a {
+  border-bottom: 1px solid transparent;
+  color: $color__accent;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+
+  &:before {
+    border-bottom: 1px solid $color__background;
+  }
+
+  &:hover {
+    border-bottom: 1px solid darken($color__accent, 7);
+    color: darken($color__accent, 7);
+
+    &:before {
+      border-bottom: 1px solid $color__background;
+    }
+  }
+}
+
+// BUTTONS
+[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+// Reset `button` and button-style `input` default styles
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: button; // for input
+  -webkit-user-select: none; // for button
+     -moz-user-select: none;
+      -ms-user-select: none;
+}
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+// Make `a` like a button
+[role="button"] {
+  color: inherit;
+  cursor: default;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  white-space: pre;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+}
+
+// Default button style
+[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  background-color: transparent;
+  border: 1px solid $font__color--base;
+  border-radius: $border-radius;
+  color: $font__color--base;
+  // opacity: .8;
+  padding: ($spacing / 2) $spacing;
+  transition: $transition;
+
+  &:hover {
+    // opacity: 1;
+  }
+}
