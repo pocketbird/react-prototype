@@ -1,2 +1,2 @@
-# MHO Messaging
-MyHealthOne Secure Messaging app prototype built with React
+# React Prototype
+Messing with all the react things.
