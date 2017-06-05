@@ -4,29 +4,29 @@ String.prototype.capitalizeFirstLetter = function() {
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
 
-function formatTime(date) {
-  const day     = date.getDay()
-  const month   = date.getMonth()
-  const year    = date.getFullYear()
-  const hh      = date.getHours()
-  let   hours   = hh
-  const minutes = "0" + date.getMinutes()
-  let   dd      = 'AM'
+// function formatTime(date) {
+//   const day     = date.getDay()
+//   const month   = date.getMonth()
+//   const year    = date.getFullYear()
+//   const hh      = date.getHours()
+//   let   hours   = hh
+//   const minutes = "0" + date.getMinutes()
+//   let   dd      = 'AM'
 
-  if (hours >= 12) {
-    hours = hh - 12
-    dd = 'PM'
-  }
+//   if (hours >= 12) {
+//     hours = hh - 12
+//     dd = 'PM'
+//   }
 
-  if (hours === 0) {
-    hours = 12
-  }
+//   if (hours === 0) {
+//     hours = 12
+//   }
 
-  // const formattedTime = month + '/' + day + '/' + year + ' @ ' + hours + ':' + minutes.substr(-2) + ' ' + dd
-  const formattedTime = month + '/' + day + '/' + year
+//   // const formattedTime = month + '/' + day + '/' + year + ' @ ' + hours + ':' + minutes.substr(-2) + ' ' + dd
+//   const formattedTime = month + '/' + day + '/' + year
 
-  return formattedTime
-}
+//   return formattedTime
+// }
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -41,7 +41,7 @@ module.exports = function() {
     data.physicians.push({
       id: i,
       specialties: [],
-      showSpecialties: false,
+      showSpecialties: true,
       rating: getRandomInt(0,5),
       isAvailable: faker.random.boolean(),
       sender: faker.name.firstName() + ' ' + faker.name.lastName(),

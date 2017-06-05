@@ -6,7 +6,7 @@ class SearchBar extends Component {
       <div className={this.props.className}>
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search by name, location, specialty, rating..."
           value={this.props.filterText}
           ref={this.props.inputValue}
           onChange={this.props.onChange}

@@ -9,6 +9,7 @@
     "prestart": "npm run scss",
     "serve": "webpack-dev-server --progress --colors",
     "start": "npm-run-all --parallel json-server scss:watch serve browser-sync",
+    "start-external": "npm-run-all --parallel scss:watch serve browser-sync",
     "scss": "node-sass app/styles/screen.scss --include-path node_modules --output public",
     "scss:watch": "node-sass -wr app/styles/screen.scss --include-path node_modules --output public",
     "test": "echo \"Error: no test specified\" && exit 1"

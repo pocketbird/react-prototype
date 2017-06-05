@@ -27,19 +27,27 @@ class MessagesContainer extends Component {
   }
 
   componentDidMount() {
-    physiciansApi.getPhysiciansList().then(PhysiciansList => {
-      this.setState({PhysiciansList: PhysiciansList})
-    })
+    // physiciansApi.getPhysiciansList().then(PhysiciansList => {
+    //   this.setState({PhysiciansList: PhysiciansList})
+    // })
   }
 
   updateSearch(event) {
     this.setState({search: event.target.value.substr(0, 20)})
+
+    if (event.target.value.substr(0) === '') {
+      this.setState({PhysiciansList: []})
+    } else {
+      physiciansApi.getPhysiciansList().then(PhysiciansList => {
+        this.setState({PhysiciansList: PhysiciansList})
+      })
+    }
   }
 
   toggleCheckbox(label) {
     switch(label) {
       case "Available":
-        console.log('label: ' + label)
+        // console.log('label: ' + label)
         this.setState({
           isAvailableOnly: !this.state.isAvailableOnly
         })
@@ -57,39 +65,49 @@ class MessagesContainer extends Component {
       //   })
       //   break
       default:
-        console.log('no checkboxes selected')
+        // console.log('no checkboxes selected')
     }
   }
 
   togglePhysician(sender, physicianId, index) {
-    console.log('TOGGLE MESSAGES: sender: ' + sender)
+    // console.log('TOGGLE MESSAGES: sender: ' + sender)
     this.updatePhysician(physicianId, index)
   }
 
   updatePhysician(physicianId, index) {
+    // let toggleValue = this.state.PhysiciansList[index]['showSpecialties']
+    // console.log('toggleValue ' + toggleValue)
+    // console.log('physicianId: ' + physicianId)
     this.state.PhysiciansList[index]['showSpecialties'] = !this.state.PhysiciansList[index]['showSpecialties']
-    this.setState(this.state.PhysiciansList)
-  }
-
-  deletePhysician(physicianId) {
-    physiciansApi.deletePhysician(physicianId).then(PhysiciansList => {
-      const newPhysiciansList = _.filter(this.state.PhysiciansList, physician => physician.id != physicianId)
-      this.setState({PhysiciansList: newPhysiciansList})
+    console.log('toggleValue ' + this.state.PhysiciansList[index]['showSpecialties'])
+    console.log('updatePhysician: ' + index + ', showSpecialties: ' + this.state.PhysiciansList[index]['showSpecialties'])
+    // this.setState(this.state.PhysiciansList)
+    physiciansApi.updatePhysician('1', this.state.PhysiciansList[index]['showSpecialties']).then(PhysiciansList => {
+      this.setState(this.state.PhysiciansList)
     })
   }
 
+  deletePhysician(physicianId) {
+    // console.log('deleting physician with id: ' + physicianId)
+    // physiciansApi.deletePhysician(physicianId).then(PhysiciansList => {
+    //   const newPhysiciansList = _.filter(this.state.PhysiciansList, physician => physician.id != physicianId)
+    //   this.setState({PhysiciansList: newPhysiciansList})
+    // })
+  }
+
   render() {
-    console.log('render')
+    // console.log('render')
     let filteredPhysiciansList = this.state.PhysiciansList.filter(
       (physician) => {
-        const vals = Object.keys(physician.specialties).map(key => physician.specialties[key])
+        let specialtyText = ''
+        for (let i = 0; i < physician.specialties.length; i++) {
+          specialtyText = specialtyText.concat(physician.specialties[i].name + ' ')
+        }
 
-        vals.forEach(function(value, i) {
-          let searchText = value.body + ' ' + value.recipient + ' ' + value.sender + ' ' + value.subject + ' ' + value.timestamp
-          value.search = searchText.toLowerCase()
-        })
+        let searchText = physician.body + ' ' + physician.recipient + ' ' + physician.sender + ' ' + physician.subject + ' ' + physician.rating + ' ' + physician.isAvailable + ' ' + specialtyText
+        physician.search = searchText.toLowerCase()
 
-        return vals[0].search.indexOf(this.state.search.toLowerCase()) !== -1
+        return physician.search.indexOf(this.state.search.toLowerCase()) !== -1;
       }
     )
 
